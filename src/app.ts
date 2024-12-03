@@ -34,7 +34,7 @@ app.use(globalErrorHandling);
 const PORT = process.env.PORT || 3000;
 // DB connectionString
 const db = {
-    uri:'mongodb+srv://12345:12345@cluster0.fu6npis.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+    uri:process.env.MONGODB_URL,
     options:{
         useUnifiedTopology:true,
         useNewUrlParser:true
@@ -43,7 +43,7 @@ const db = {
 
 // Connect to DB
 // Start Server
-mongoose.connect(db.uri, db.options)
+mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/login-system', db.options)
 .then(result=>{
     console.log('mongoDB Connected ...');
     app.listen(PORT, () => {
